@@ -1,0 +1,1 @@
+GLB dosyanızı bu klasöre koyup adını model.glb yapın. iPhone için model.usdz opsiyoneldir.
