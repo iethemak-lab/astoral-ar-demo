@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Astoral AR Viewer</title>
+
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+  <style>
+    :root {
+      --astoral-red: #BA0020;
+      --astoral-dark: #25282A;
+      --bg: #f6f6f6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--astoral-dark);
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 4px solid var(--astoral-red);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--astoral-red);
+      font-size: 24px;
+    }
+
+    .page {
+      min-height: calc(100vh - 76px);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      padding: 24px;
+    }
+
+    .viewer-card,
+    .info-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 72vh;
+      background: #eeeeee;
+    }
+
+    .info-card {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 32px;
+      line-height: 1.15;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.55;
+      margin: 0 0 16px;
+    }
+
+    .note {
+      background: #f2f2f2;
+      border-left: 5px solid var(--astoral-red);
+      padding: 14px 16px;
+      border-radius: 10px;
+      margin-top: 14px;
+      font-size: 14px;
+    }
+
+    .ar-button {
+      background: var(--astoral-red);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(186,0,32,0.25);
+    }
+
+    .ar-button:hover { filter: brightness(0.95); }
+
+    @media (max-width: 900px) {
+      .page {
+        grid-template-columns: 1fr;
+        padding: 12px;
+      }
+
+      model-viewer { height: 62vh; }
+
+      h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">ASTORAL</div>
+    <div>3D / AR Ürün Görüntüleme</div>
+  </header>
+
+  <main class="page">
+    <section class="viewer-card">
+      <model-viewer
+        src="model.glb"
+        ios-src="model.usdz"
+        alt="Astoral 3D ürün modeli"
+        ar
+        ar-modes="webxr scene-viewer quick-look"
+        camera-controls
+        touch-action="pan-y"
+        auto-rotate
+        shadow-intensity="1"
+        exposure="1"
+        environment-image="neutral"
+        camera-orbit="45deg 65deg auto"
+        field-of-view="35deg">
+
+        <button slot="ar-button" class="ar-button">
+          AR’de Mekânda Gör
+        </button>
+      </model-viewer>
+    </section>
+
+    <aside class="info-card">
+      <h1>Ürünü Mekânda Gör</h1>
+      <p>
+        Bu sayfa GLB modelini 3D olarak gösterir. Uyumlu telefonda
+        <strong>AR’de Mekânda Gör</strong> butonuna basıldığında kamera açılır ve ürün gerçek ortama yerleştirilir.
+      </p>
+      <p>
+        Android tarafında GLB ile, iPhone tarafında ise USDZ dosyasıyla daha sağlıklı çalışır.
+      </p>
+      <div class="note">
+        Önemli: Modelin gerçek ölçekte görünmesi için GLB dosyasının ölçek/birim kontrolü doğru olmalı.
+      </div>
+    </aside>
+  </main>
+</body>
+</html>
